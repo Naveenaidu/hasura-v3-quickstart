@@ -1,0 +1,34 @@
+kind: ScalarType
+version: v1
+definition:
+  name: int4
+  graphql:
+    typeName: int4
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: varchar
+  graphql:
+    typeName: varchar
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: pg_db
+  dataConnectorScalarType: int4
+  representation: int4
+  graphql:
+    comparisonExpressionTypeName: int4ComparisonExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: pg_db
+  dataConnectorScalarType: varchar
+  representation: varchar
+  graphql:
+    comparisonExpressionTypeName: varcharComparisonExp

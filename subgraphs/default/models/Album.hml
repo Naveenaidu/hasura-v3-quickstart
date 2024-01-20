@@ -1,0 +1,77 @@
+kind: ObjectType
+version: v1
+definition:
+  name: Album
+  graphql:
+    typeName: album
+    inputTypeName: albumInput
+  fields:
+    - name: AlbumId
+      type: int4!
+    - name: ArtistId
+      type: int4!
+    - name: Title
+      type: varchar!
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Album
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - AlbumId
+          - ArtistId
+          - Title
+
+---
+kind: Model
+version: v1
+definition:
+  name: Album
+  objectType: Album
+  filterableFields:
+    - fieldName: AlbumId
+      operators:
+        enableAll: true
+    - fieldName: ArtistId
+      operators:
+        enableAll: true
+    - fieldName: Title
+      operators:
+        enableAll: true
+  orderableFields:
+    - fieldName: AlbumId
+      orderByDirections:
+        enableAll: true
+    - fieldName: ArtistId
+      orderByDirections:
+        enableAll: true
+    - fieldName: Title
+      orderByDirections:
+        enableAll: true
+  arguments: []
+  graphql:
+    selectUniques:
+      - queryRootField: albumByAlbumid
+        uniqueIdentifier:
+          - AlbumId
+    selectMany:
+      queryRootField: album
+    filterExpressionType: albumBoolExp
+    orderByExpressionType: albumOrderBy
+  source:
+    collection: Album
+    dataConnectorName: pg_db
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Album
+  permissions:
+    - role: admin
+      select:
+        filter: null
